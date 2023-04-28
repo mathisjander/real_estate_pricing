@@ -7,22 +7,15 @@ import numpy as np
 import pickle
 import xgboost as xgb
 import shap
-import streamlit.components.v1 as components
-
-
-def st_shap(plot, height=None):
-    shap_html = f"<head>{shap.getjs()}</head><body>{plot.html()}</body>"
-    components.html(shap_html, height=height)
-
 
 
 def main():
  
     # load the model
-    model = pickle.load(open('real_estate_model.pkl', 'rb'))
+    model = pickle.load('real_estate_model.pkl')
 
     # load the scaler
-    scaler = pickle.load(open('input_scaler.pkl', 'rb'))
+    scaler = pickle.load('input_scaler.pkl')
 
     # create input widgets in streamlit app for model inputs
 
@@ -48,19 +41,15 @@ def main():
 
     # add shap values to explain prediction
     st.text('The following features contributed to the prediction:')
-    explainer = pickle.load(open('explainer.pkl', 'rb'))
+    explainer = pickle.load('explainer.pkl')
 
     shap_values = explainer.shap_values(scaler.transform(input_df))
-
-    # Calculate SHAP values for the user input
-    user_shap_values = explainer.shap_values(input_df)
-
     
 
     # Create the force plot
     fig = shap.force_plot(
         base_value=explainer.expected_value,
-        shap_values=user_shap_values[0],
+        shap_values=shap_values[0],
         features=input_df.iloc[0,:],
         feature_names=input_df.columns,
         matplotlib=True,
