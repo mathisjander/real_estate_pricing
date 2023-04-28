@@ -7,15 +7,26 @@ import numpy as np
 import pickle
 import xgboost as xgb
 import shap
+import os
 
 
 def main():
+
+    # Get the absolute path of the directory containing main.py
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+
+# Construct the absolute path of the .pkl file
+    model_path = os.path.join(current_dir, 'real_estate_model.pkl')
+
  
     # load the model
-    model = pickle.load(open('real_estate_model.pkl', 'rb'))
+    model = pickle.load(open(model_path, 'rb'))
+
+    # Construct the absolute path of the .pkl file
+    scaler_path = os.path.join(current_dir, 'input_scaler.pkl')
 
     # load the scaler
-    scaler = pickle.load(open('input_scaler.pkl', 'rb'))
+    scaler = pickle.load(open(scaler_path, 'rb'))
 
     # create input widgets in streamlit app for model inputs
 
@@ -41,7 +52,10 @@ def main():
 
     # add shap values to explain prediction
     st.text('The following features contributed to the prediction:')
-    explainer = pickle.load(open('explainer.pkl', 'rb'))
+
+    # Construct the absolute path of the .pkl file
+    explainler_path = os.path.join(current_dir, 'explainer.pkl')
+    explainer = pickle.load(open(explainler_path, 'rb'))
 
     shap_values = explainer.shap_values(scaler.transform(input_df))
     
