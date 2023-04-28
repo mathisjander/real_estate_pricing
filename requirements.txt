@@ -30,7 +30,6 @@ joblib==1.2.0
 jsonschema @ file:///opt/concourse/worker/volumes/live/6fbb9c38-fac1-4d90-7fd5-41153c174d3e/volume/jsonschema_1650025615201/work
 jupyter @ file:///Users/builder/ci_310/jupyter_1642522230784/work
 jupyter-console @ file:///opt/conda/conda-bld/jupyter_console_1647002188872/work
-jupyter_client @ file:///home/conda/feedstock_root/build_artifacts/jupyter_client_1681432441054/work
 jupyter_core @ file:///Users/runner/miniforge3/conda-bld/jupyter_core_1678994447003/work
 jupyterlab-pygments @ file:///tmp/build/80754af9/jupyterlab_pygments_1601490720602/work
 jupyterlab-widgets @ file:///tmp/build/80754af9/jupyterlab_widgets_1609884341231/work
