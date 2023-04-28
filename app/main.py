@@ -12,16 +12,16 @@ import shap
 def main():
  
     # load the model
-    model = pickle.load('real_estate_model.pkl')
+    model = pickle.load(open('real_estate_model.pkl', 'rb'))
 
     # load the scaler
-    scaler = pickle.load('input_scaler.pkl')
+    scaler = pickle.load(open('input_scaler.pkl', 'rb'))
 
     # create input widgets in streamlit app for model inputs
 
     st.title('Real Estate Price Predictor')
-    st.text('Disclaimer: This app is a study project and the predictions returned should be not taken at face value. The model was trained on real estate listings in Berlin (Germany) during April 2023')
-    st.text('Please enter the following information to get a price estimate for your home.')
+    st.text('Disclaimer: This app is a study project and the predictions returned should be not \ntaken at face value. \nThe model was trained on real estate listings in Berlin (Germany) during April 2023.')
+    st.text('Please enter the following information to get a price estimate for your apartment.')
     
     
     area = st.number_input('Area in square meters', min_value=0, max_value=5000, value=50, step=1)
@@ -41,7 +41,7 @@ def main():
 
     # add shap values to explain prediction
     st.text('The following features contributed to the prediction:')
-    explainer = pickle.load('explainer.pkl')
+    explainer = pickle.load(open('explainer.pkl', 'rb'))
 
     shap_values = explainer.shap_values(scaler.transform(input_df))
     
